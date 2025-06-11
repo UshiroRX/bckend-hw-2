@@ -27,6 +27,7 @@ services:
       FRONTEND_URLS: http://localhost:5173
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
 
   redis:
     image: redis:7
