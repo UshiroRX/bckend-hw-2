@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     REDIS_HOST: str
     CELERY_BROKER_URL: str
     CELERY_RESULT_BACKEND: str
+    OPENAI_API_KEY : str
     class Config:
         env_file = str(Path(__file__).parent.parent / ".env")
 

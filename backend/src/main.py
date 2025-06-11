@@ -2,11 +2,14 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from auth.router import router as auth_router
+from assistant.schemas import ProductRequest
 from config import settings
 from utils.redis import get_redis
 from redis.asyncio import Redis 
 from celery.result import AsyncResult
 from tasks.task import add, fetch_data_daily
+from assistant.service import run_market_agents
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -52,3 +55,9 @@ def get_status(task_id: str):
         "status": result.status,
         "result": result.result if result.ready() else None
     }
+
+
+@app.post("/create_listing")
+async def create_listing(req: ProductRequest):
+    result = run_market_agents(req.product)
+    return {"result": result}
