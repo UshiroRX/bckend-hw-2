@@ -46,7 +46,7 @@ def run_market_agents(user_input: str) -> str:
     messages = groupchat.messages
 
     generated = [m["content"] for m in messages if m["name"] == "ProductDescriber"]
-    translated = [m["content"] for m in messages if m["name"] == "PriceFinder"]
+    translated = [m["content"] for m in messages if m["name"] == "LangTranslator"]
 
     return {
         "generated": generated[-1] if generated else None,
